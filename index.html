@@ -347,6 +347,7 @@ select option{background:#1A1810}
           </div>
         </div>
         <div class="row-end">
+          <button class="btn btn-danger" id="entry-delete-btn" onclick="deleteCurrentEntry()" style="display:none;margin-right:auto">🗑️ বিল মুছুন</button>
           <button class="btn btn-outline" id="entry-cancel-btn" onclick="resetEntryForm()" style="display:none">বাতিল</button>
           <button class="btn btn-primary" id="entry-save-btn" onclick="saveEntry()">সংরক্ষণ করুন</button>
         </div>
@@ -587,9 +588,15 @@ window.saveEntry = async function() {
     note:     document.getElementById('e_note').value.trim(),
     savedAt:  Date.now()
   };
-  const key = month.replace('-','_');
+  const newKey = month.replace('-','_');
+
+  // If user changed month during edit, delete old record key first
+  if (editKey && editKey !== newKey) {
+    await remove(ref(db, 'electricity/records/' + editKey));
+  }
+
   setSync('syncing','সংরক্ষণ হচ্ছে…');
-  await set(ref(db,'electricity/records/'+key), rec);
+  await set(ref(db,'electricity/records/'+newKey), rec);
   setSync('synced','সিঙ্ক হয়েছে ✓');
   resetEntryForm();
 };
@@ -614,16 +621,19 @@ window.editRecord = function(key) {
   document.getElementById('entry-title').textContent = '✏️ ' + bnMonth(r.month) + ' — সম্পাদনা';
   document.getElementById('entry-save-btn').textContent = 'আপডেট করুন';
   document.getElementById('entry-cancel-btn').style.display = 'inline-block';
+  document.getElementById('entry-delete-btn').style.display = 'inline-block';
   document.getElementById('entry-card').classList.add('edit-mode');
   document.getElementById('entry-card').scrollIntoView({behavior:'smooth'});
 };
 
-window.deleteRecord = async function(key) {
-  const r = allRecords[key];
-  if (!r || !confirm(bnMonth(r.month) + ' এর বিল মুছে ফেলবেন?')) return;
+window.deleteCurrentEntry = async function() {
+  if (!editKey) return;
+  const r = allRecords[editKey];
+  if (!r || !confirm(bnMonth(r.month) + ' এর বিল মুছে ফেলতে চান?')) return;
   setSync('syncing','মুছছে…');
-  await remove(ref(db,'electricity/records/'+key));
+  await remove(ref(db,'electricity/records/'+editKey));
   setSync('synced','সিঙ্ক হয়েছে ✓');
+  resetEntryForm();
 };
 
 window.resetEntryForm = function() {
@@ -636,6 +646,7 @@ window.resetEntryForm = function() {
   document.getElementById('entry-title').textContent = 'নতুন বিল যোগ করুন';
   document.getElementById('entry-save-btn').textContent = 'সংরক্ষণ করুন';
   document.getElementById('entry-cancel-btn').style.display = 'none';
+  document.getElementById('entry-delete-btn').style.display = 'none';
   document.getElementById('entry-card').classList.remove('edit-mode');
 };
 
@@ -753,9 +764,8 @@ function renderHistory() {
       <td class="mono" style="color:var(--yellow)">৳ ${r.amount.toLocaleString()}</td>
       <td><span class="badge ${r.status==='paid'?'badge-paid':'badge-unpaid'}">${r.status==='paid'?'পরিশোধিত':'বকেয়া'}</span></td>
       <td style="color:var(--muted);font-size:0.75rem">${r.note||'—'}</td>
-      <td style="display:flex;gap:5px;flex-wrap:wrap">
-        <button class="btn btn-edit btn-sm" onclick="editRecord('${key(r.month)}')">✏️</button>
-        <button class="btn btn-danger btn-sm" onclick="deleteRecord('${key(r.month)}')">✕</button>
+      <td>
+        <button class="btn btn-edit btn-sm" onclick="editRecord('${key(r.month)}')">✏️ এডিট</button>
       </td>
     </tr>`;
   });
