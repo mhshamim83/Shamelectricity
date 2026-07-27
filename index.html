@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>⚡ বিদ্যুৎ বিল ট্র্যাকার — Shamfinance</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
   --yellow:#F5B731;--dark-yellow:#C9880A;
@@ -35,7 +35,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 
 /* Header */
 .header{text-align:center;padding:24px 0 20px}
-.header h1{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;
+.header h1{font-family:'Tiro Bangla',serif;font-size:1.8rem;font-weight:900;
   background:linear-gradient(135deg,#FFE066,#F5B731,#C9880A);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   letter-spacing:-0.5px;line-height:1.1}
@@ -94,7 +94,6 @@ input,select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(
   border-radius:9px;padding:9px 12px;color:var(--text);
   font-size:0.92rem;outline:none;transition:border-color 0.2s}
 input:focus,select:focus{border-color:rgba(245,183,49,0.5)}
-input[type=number]::-webkit-inner-spin-button{opacity:0.4}
 select option{background:#1A1810}
 
 .btn{border:none;border-radius:9px;padding:10px 20px;
@@ -194,27 +193,27 @@ select option{background:#1A1810}
       <div class="form-grid">
         <div>
           <label>বর্তমান মিটার রিডিং (kWh)</label>
-          <input type="number" id="c_curr" placeholder="যেমন: ১১,৯৪৫" oninput="onReadingInput()">
+          <input type="text" id="c_curr" placeholder="যেমন: ১১৯৫" oninput="onReadingInput()">
         </div>
         <div>
           <label>আগের মিটার রিডিং (kWh)</label>
-          <input type="number" id="c_prev" placeholder="যেমন: ১১,১৪৫" oninput="onReadingInput()">
+          <input type="text" id="c_prev" placeholder="যেমন: ১১১৪" oninput="onReadingInput()">
         </div>
         <div>
           <label>অথবা সরাসরি ইউনিট (kWh)</label>
-          <input type="number" id="c_units" placeholder="যেমন: ৮০০" oninput="calcBill()">
+          <input type="text" id="c_units" placeholder="যেমন: ৮০" oninput="calcBill()">
         </div>
         <div>
           <label>মিটার ভাড়া (টাকা)</label>
-          <input type="number" id="c_meter" value="10" oninput="calcBill()">
+          <input type="text" id="c_meter" value="১০" oninput="calcBill()">
         </div>
         <div>
           <label>স্যাংশন লোড (kW)</label>
-          <input type="number" id="c_load" value="3" oninput="onLoadInput()">
+          <input type="text" id="c_load" value="৩" oninput="onLoadInput()">
         </div>
         <div>
           <label>ডিমান্ড চার্জ (৳৪২/kW — স্বয়ংক্রিয়)</label>
-          <input type="number" id="c_demand" value="126" oninput="calcBill()">
+          <input type="text" id="c_demand" value="১২৬" oninput="calcBill()">
         </div>
       </div>
       <div id="result-area" style="display:none">
@@ -240,7 +239,7 @@ select option{background:#1A1810}
         </div>
         <div>
           <label>মোট বিল (সংশোধন করতে পারবেন)</label>
-          <input type="number" id="s_amount">
+          <input type="text" id="s_amount">
         </div>
         <div>
           <label>স্ট্যাটাস</label>
@@ -296,39 +295,39 @@ select option{background:#1A1810}
           </div>
           <div>
             <label>বর্তমান মিটার রিডিং (kWh)</label>
-            <input type="number" id="e_curr" placeholder="যেমন: ১১,৯৪৫" oninput="eAutoReading()">
+            <input type="text" id="e_curr" placeholder="যেমন: ১১৯৫" oninput="eAutoReading()">
           </div>
           <div>
             <label>আগের মিটার রিডিং (kWh)</label>
-            <input type="number" id="e_prev" placeholder="যেমন: ১১,১৪৫" oninput="eAutoReading()">
+            <input type="text" id="e_prev" placeholder="যেমন: ১১১৪" oninput="eAutoReading()">
           </div>
           <div>
             <label>ইউনিট (kWh)</label>
-            <input type="number" id="e_units" placeholder="স্বয়ংক্রিয় বা নিজে লিখুন" oninput="eAutoCalc()">
+            <input type="text" id="e_units" placeholder="স্বয়ংক্রিয় বা নিজে লিখুন" oninput="eAutoCalc()">
           </div>
           <div>
             <label>শক্তি চার্জ (টাকা)</label>
-            <input type="number" id="e_energy" placeholder="স্বয়ংক্রিয়">
+            <input type="text" id="e_energy" placeholder="স্বয়ংক্রিয়">
           </div>
           <div>
             <label>মিটার ভাড়া (টাকা)</label>
-            <input type="number" id="e_meter" value="10" oninput="eAutoCalc()">
+            <input type="text" id="e_meter" value="১০" oninput="eAutoCalc()">
           </div>
           <div>
             <label>ডিমান্ড চার্জ (৳৪২/kW)</label>
-            <input type="number" id="e_demand" value="126" oninput="eAutoCalc()">
+            <input type="text" id="e_demand" value="১২৬" oninput="eAutoCalc()">
           </div>
           <div>
             <label>বিলম্ব সারচার্জ LPS (টাকা)</label>
-            <input type="number" id="e_lps" value="0" oninput="eAutoCalc()">
+            <input type="text" id="e_lps" value="০" oninput="eAutoCalc()">
           </div>
           <div>
             <label>ভ্যাট (৫% স্বয়ংক্রিয়)</label>
-            <input type="number" id="e_vat" placeholder="স্বয়ংক্রিয়">
+            <input type="text" id="e_vat" placeholder="স্বয়ংক্রিয়">
           </div>
           <div>
             <label>মোট বিল (টাকা) ★</label>
-            <input type="number" id="e_amount" placeholder="চূড়ান্ত পরিমাণ">
+            <input type="text" id="e_amount" placeholder="চূড়ান্ত পরিমাণ">
           </div>
           <div>
             <label>স্ট্যাটাস</label>
@@ -417,6 +416,21 @@ const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 const elecRef = ref(db, 'electricity/records');
 
+// ── Helper functions for Bangla Number Conversions ──
+const bnMap = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+const enMap = {'০':0,'১':1,'২':2,'৩':3,'৪':4,'৫':5,'৬':6,'৭':7,'৮':8,'৯':9};
+
+function toBnNum(num) {
+  if (num === null || num === undefined || isNaN(num)) return '০';
+  return num.toString().replace(/\d/g, d => bnMap[d]);
+}
+
+function parseBnNum(str) {
+  if (!str) return 0;
+  let enStr = str.toString().replace(/[০-৯]/g, d => enMap[d]);
+  return parseFloat(enStr) || 0;
+}
+
 // ── sync status ──
 function setSync(state, txt) {
   const el = document.getElementById('syncStatus');
@@ -467,22 +481,22 @@ window.setTab = function(name, btn) {
 
 // ══ CALCULATOR ══
 window.onReadingInput = function() {
-  const curr = parseFloat(document.getElementById('c_curr').value)||0;
-  const prev = parseFloat(document.getElementById('c_prev').value)||0;
-  if (curr > prev && prev > 0) document.getElementById('c_units').value = curr - prev;
+  const curr = parseBnNum(document.getElementById('c_curr').value);
+  const prev = parseBnNum(document.getElementById('c_prev').value);
+  if (curr > prev && prev > 0) document.getElementById('c_units').value = toBnNum(curr - prev);
   calcBill();
 };
 window.onLoadInput = function() {
-  const load = parseFloat(document.getElementById('c_load').value)||0;
-  document.getElementById('c_demand').value = (load * 42).toFixed(0);
+  const load = parseBnNum(document.getElementById('c_load').value);
+  document.getElementById('c_demand').value = toBnNum((load * 42).toFixed(0));
   calcBill();
 };
 window.calcBill = function() {
-  const curr   = parseFloat(document.getElementById('c_curr').value)||0;
-  const prev   = parseFloat(document.getElementById('c_prev').value)||0;
-  const direct = parseFloat(document.getElementById('c_units').value)||0;
-  const meter  = parseFloat(document.getElementById('c_meter').value)||0;
-  const demand = parseFloat(document.getElementById('c_demand').value)||0;
+  const curr   = parseBnNum(document.getElementById('c_curr').value);
+  const prev   = parseBnNum(document.getElementById('c_prev').value);
+  const direct = parseBnNum(document.getElementById('c_units').value);
+  const meter  = parseBnNum(document.getElementById('c_meter').value);
+  const demand = parseBnNum(document.getElementById('c_demand').value);
 
   let units = direct > 0 ? direct : (curr > prev ? curr - prev : 0);
   if (units <= 0) { document.getElementById('result-area').style.display='none'; return; }
@@ -493,27 +507,28 @@ window.calcBill = function() {
   const grand = sub + vat;
 
   document.getElementById('result-area').style.display = 'block';
-  document.getElementById('result-total').textContent = '৳ ' + Math.round(grand).toLocaleString();
+  document.getElementById('result-total').textContent = '৳ ' + toBnNum(Math.round(grand));
 
   let html = '';
   details.forEach((d, i) => {
     if (d.used > 0) html += `<div class="b-row">
-      <span class="b-lbl">${i+1}ম ধাপ · ${d.used.toFixed(0)} kWh × ৳${d.rate}<span class="slab-tag">${d.from}–${d.to}</span></span>
-      <span class="b-val">৳ ${d.charge.toFixed(2)}</span></div>`;
+      <span class="b-lbl">${toBnNum(i+1)}ম ধাপ · ${toBnNum(d.used.toFixed(0))} kWh × ৳${toBnNum(d.rate)}<span class="slab-tag">${toBnNum(d.from)}–${toBnNum(d.to)}</span></span>
+      <span class="b-val">৳ ${toBnNum(d.charge.toFixed(2))}</span></div>`;
   });
-  html += `<div class="b-row"><span class="b-lbl">শক্তি চার্জ উপমোট</span><span class="b-val">৳ ${energy.toFixed(2)}</span></div>`;
-  if (meter)  html += `<div class="b-row"><span class="b-lbl">মিটার ভাড়া</span><span class="b-val">৳ ${meter.toFixed(2)}</span></div>`;
-  if (demand) html += `<div class="b-row"><span class="b-lbl">ডিমান্ড চার্জ</span><span class="b-val">৳ ${demand.toFixed(2)}</span></div>`;
-  html += `<div class="b-row"><span class="b-lbl">ভ্যাট (৫%)</span><span class="b-val">৳ ${vat.toFixed(2)}</span></div>`;
-  html += `<div class="b-row b-total"><span class="b-lbl">মোট প্রদেয়</span><span class="b-val">৳ ${Math.round(grand).toLocaleString()}</span></div>`;
+  html += `<div class="b-row"><span class="b-lbl">শক্তি চার্জ উপমোট</span><span class="b-val">৳ ${toBnNum(energy.toFixed(2))}</span></div>`;
+  if (meter)  html += `<div class="b-row"><span class="b-lbl">মিটার ভাড়া</span><span class="b-val">৳ ${toBnNum(meter.toFixed(2))}</span></div>`;
+  if (demand) html += `<div class="b-row"><span class="b-lbl">ডিমান্ড চার্জ</span><span class="b-val">৳ ${toBnNum(demand.toFixed(2))}</span></div>`;
+  html += `<div class="b-row"><span class="b-lbl">ভ্যাট (৫%)</span><span class="b-val">৳ ${toBnNum(vat.toFixed(2))}</span></div>`;
+  html += `<div class="b-row b-total"><span class="b-lbl">মোট প্রদেয়</span><span class="b-val">৳ ${toBnNum(Math.round(grand))}</span></div>`;
   document.getElementById('breakdown').innerHTML = html;
 
   // pre-fill save
-  document.getElementById('s_amount').value = Math.round(grand);
+  document.getElementById('s_amount').value = toBnNum(Math.round(grand));
   const now = new Date(); document.getElementById('s_month').value = now.toISOString().slice(0,7);
   window._calcState = { units, currRead: curr, prevRead: prev, energy: +energy.toFixed(2),
     meter, demand, vat: +vat.toFixed(2), amount: Math.round(grand) };
 };
+
 window.clearCalc = function() {
   ['c_curr','c_prev','c_units'].forEach(id => document.getElementById(id).value='');
   document.getElementById('result-area').style.display = 'none';
@@ -527,7 +542,7 @@ window.closeSave = function() { document.getElementById('save-panel').style.disp
 
 window.doSave = async function() {
   const month  = document.getElementById('s_month').value;
-  const amount = parseFloat(document.getElementById('s_amount').value);
+  const amount = parseBnNum(document.getElementById('s_amount').value);
   if (!month || isNaN(amount)) { alert('মাস ও পরিমাণ দিন।'); return; }
   const st = window._calcState || {};
   const rec = {
@@ -550,38 +565,38 @@ window.doSave = async function() {
 let editKey = null;
 
 window.eAutoReading = function() {
-  const curr = parseFloat(document.getElementById('e_curr').value)||0;
-  const prev = parseFloat(document.getElementById('e_prev').value)||0;
-  if (curr > prev && prev > 0) { document.getElementById('e_units').value = curr - prev; eAutoCalc(); }
+  const curr = parseBnNum(document.getElementById('e_curr').value);
+  const prev = parseBnNum(document.getElementById('e_prev').value);
+  if (curr > prev && prev > 0) { document.getElementById('e_units').value = toBnNum(curr - prev); eAutoCalc(); }
 };
 window.eAutoCalc = function() {
-  const units  = parseFloat(document.getElementById('e_units').value)||0;
-  const meter  = parseFloat(document.getElementById('e_meter').value)||0;
-  const demand = parseFloat(document.getElementById('e_demand').value)||0;
-  const lps    = parseFloat(document.getElementById('e_lps').value)||0;
+  const units  = parseBnNum(document.getElementById('e_units').value);
+  const meter  = parseBnNum(document.getElementById('e_meter').value);
+  const demand = parseBnNum(document.getElementById('e_demand').value);
+  const lps    = parseBnNum(document.getElementById('e_lps').value);
   if (units > 0) {
     const { total: energy } = calcEnergy(units);
-    document.getElementById('e_energy').value = energy.toFixed(2);
+    document.getElementById('e_energy').value = toBnNum(energy.toFixed(2));
     const vat = (energy + meter + demand) * VAT;
-    document.getElementById('e_vat').value = vat.toFixed(2);
-    document.getElementById('e_amount').value = Math.round(energy + meter + demand + vat + lps);
+    document.getElementById('e_vat').value = toBnNum(vat.toFixed(2));
+    document.getElementById('e_amount').value = toBnNum(Math.round(energy + meter + demand + vat + lps));
   }
 };
 
 window.saveEntry = async function() {
   const month  = document.getElementById('e_month').value;
-  const amount = parseFloat(document.getElementById('e_amount').value);
+  const amount = parseBnNum(document.getElementById('e_amount').value);
   if (!month || isNaN(amount)) { alert('মাস ও মোট বিল অবশ্যই দিন।'); return; }
   const rec = {
     month,
-    currRead: parseFloat(document.getElementById('e_curr').value)||0,
-    prevRead: parseFloat(document.getElementById('e_prev').value)||0,
-    units:    parseFloat(document.getElementById('e_units').value)||0,
-    energy:   parseFloat(document.getElementById('e_energy').value)||0,
-    meter:    parseFloat(document.getElementById('e_meter').value)||0,
-    demand:   parseFloat(document.getElementById('e_demand').value)||0,
-    lps:      parseFloat(document.getElementById('e_lps').value)||0,
-    vat:      parseFloat(document.getElementById('e_vat').value)||0,
+    currRead: parseBnNum(document.getElementById('e_curr').value),
+    prevRead: parseBnNum(document.getElementById('e_prev').value),
+    units:    parseBnNum(document.getElementById('e_units').value),
+    energy:   parseBnNum(document.getElementById('e_energy').value),
+    meter:    parseBnNum(document.getElementById('e_meter').value),
+    demand:   parseBnNum(document.getElementById('e_demand').value),
+    lps:      parseBnNum(document.getElementById('e_lps').value),
+    vat:      parseBnNum(document.getElementById('e_vat').value),
     amount,
     status:   document.getElementById('e_status').value,
     paidDate: document.getElementById('e_pdate').value,
@@ -590,7 +605,6 @@ window.saveEntry = async function() {
   };
   const newKey = month.replace('-','_');
 
-  // If user changed month during edit, delete old record key first
   if (editKey && editKey !== newKey) {
     await remove(ref(db, 'electricity/records/' + editKey));
   }
@@ -606,15 +620,15 @@ window.editRecord = function(key) {
   if (!r) return;
   editKey = key;
   document.getElementById('e_month').value   = r.month;
-  document.getElementById('e_curr').value   = r.currRead||'';
-  document.getElementById('e_prev').value   = r.prevRead||'';
-  document.getElementById('e_units').value  = r.units||'';
-  document.getElementById('e_energy').value = r.energy||'';
-  document.getElementById('e_meter').value  = r.meter!=null?r.meter:10;
-  document.getElementById('e_demand').value = r.demand||126;
-  document.getElementById('e_lps').value    = r.lps||0;
-  document.getElementById('e_vat').value    = r.vat||'';
-  document.getElementById('e_amount').value = r.amount;
+  document.getElementById('e_curr').value   = r.currRead ? toBnNum(r.currRead) : '';
+  document.getElementById('e_prev').value   = r.prevRead ? toBnNum(r.prevRead) : '';
+  document.getElementById('e_units').value  = r.units ? toBnNum(r.units) : '';
+  document.getElementById('e_energy').value = r.energy ? toBnNum(r.energy) : '';
+  document.getElementById('e_meter').value  = r.meter!=null ? toBnNum(r.meter) : '১০';
+  document.getElementById('e_demand').value = r.demand ? toBnNum(r.demand) : '১২৬';
+  document.getElementById('e_lps').value    = r.lps ? toBnNum(r.lps) : '০';
+  document.getElementById('e_vat').value    = r.vat ? toBnNum(r.vat) : '';
+  document.getElementById('e_amount').value = toBnNum(r.amount);
   document.getElementById('e_status').value = r.status||'unpaid';
   document.getElementById('e_pdate').value  = r.paidDate||'';
   document.getElementById('e_note').value   = r.note||'';
@@ -639,9 +653,9 @@ window.deleteCurrentEntry = async function() {
 window.resetEntryForm = function() {
   editKey = null;
   ['e_month','e_curr','e_prev','e_units','e_energy','e_vat','e_amount','e_pdate','e_note'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('e_meter').value  = 10;
-  document.getElementById('e_demand').value = 126;
-  document.getElementById('e_lps').value    = 0;
+  document.getElementById('e_meter').value  = '১০';
+  document.getElementById('e_demand').value = '১২৬';
+  document.getElementById('e_lps').value    = '০';
   document.getElementById('e_status').value = 'unpaid';
   document.getElementById('entry-title').textContent = 'নতুন বিল যোগ করুন';
   document.getElementById('entry-save-btn').textContent = 'সংরক্ষণ করুন';
@@ -696,7 +710,7 @@ window.importData = function(event) {
     }
   };
   reader.readAsText(file);
-  event.target.value = ''; // Reset input
+  event.target.value = '';
 };
 
 // ══ RENDER HISTORY ══
@@ -705,7 +719,7 @@ function bnMonth(ym) {
   const [y,m] = ym.split('-');
   const names = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন',
                  'জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
-  return names[parseInt(m)-1] + ' ' + y;
+  return names[parseInt(m)-1] + ' ' + toBnNum(y);
 }
 
 function renderHistory() {
@@ -729,10 +743,10 @@ function renderHistory() {
   const unitArr = recs.map(r=>r.units).filter(u=>u>0);
   const avgBill = amounts.reduce((a,b)=>a+b,0)/amounts.length;
   const avgUnit = unitArr.length ? unitArr.reduce((a,b)=>a+b,0)/unitArr.length : 0;
-  document.getElementById('s-avg-unit').textContent = avgUnit>0 ? Math.round(avgUnit)+' kWh' : '—';
-  document.getElementById('s-avg-bill').textContent = '৳'+Math.round(avgBill).toLocaleString();
-  document.getElementById('s-max').textContent = '৳'+Math.max(...amounts).toLocaleString();
-  document.getElementById('s-total').textContent = '৳'+amounts.reduce((a,b)=>a+b,0).toLocaleString();
+  document.getElementById('s-avg-unit').textContent = avgUnit>0 ? toBnNum(Math.round(avgUnit))+' kWh' : '—';
+  document.getElementById('s-avg-bill').textContent = '৳'+toBnNum(Math.round(avgBill));
+  document.getElementById('s-max').textContent = '৳'+toBnNum(Math.max(...amounts));
+  document.getElementById('s-total').textContent = '৳'+toBnNum(amounts.reduce((a,b)=>a+b,0));
 
   // Chart
   const maxAmt = Math.max(...amounts);
@@ -741,8 +755,8 @@ function renderHistory() {
     const h = Math.round((r.amount/maxAmt)*130);
     const mo = bnMonth(r.month).slice(0,3);
     return `<div class="bar-col">
-      <div class="bar-amt">৳${(r.amount/1000).toFixed(1)}k</div>
-      <div class="bar-fill" style="height:${h}px" title="${bnMonth(r.month)}: ৳${r.amount}"></div>
+      <div class="bar-amt">৳${toBnNum((r.amount/1000).toFixed(1))}k</div>
+      <div class="bar-fill" style="height:${h}px" title="${bnMonth(r.month)}: ৳${toBnNum(r.amount)}"></div>
       <div class="bar-month">${mo}</div></div>`;
   }).join('');
 
@@ -755,13 +769,13 @@ function renderHistory() {
 
   recs.slice().reverse().forEach(r => {
     const rdg = (r.currRead && r.prevRead)
-      ? `<span class="curr-r">${r.currRead.toLocaleString()}</span><span class="arrow-r"> ← </span><span class="prev-r">${r.prevRead.toLocaleString()}</span>`
-      : r.currRead ? `<span class="curr-r">${r.currRead.toLocaleString()}</span>` : '—';
+      ? `<span class="curr-r">${toBnNum(r.currRead)}</span><span class="arrow-r"> ← </span><span class="prev-r">${toBnNum(r.prevRead)}</span>`
+      : r.currRead ? `<span class="curr-r">${toBnNum(r.currRead)}</span>` : '—';
     tbl += `<tr>
       <td>${bnMonth(r.month)}</td>
       <td class="reading-cell">${rdg}</td>
-      <td>${r.units>0?r.units+' kWh':'—'}</td>
-      <td style="color:var(--yellow)">৳ ${r.amount.toLocaleString()}</td>
+      <td>${r.units>0 ? toBnNum(r.units)+' kWh' : '—'}</td>
+      <td style="color:var(--yellow)">৳ ${toBnNum(r.amount)}</td>
       <td><span class="badge ${r.status==='paid'?'badge-paid':'badge-unpaid'}">${r.status==='paid'?'পরিশোধিত':'বকেয়া'}</span></td>
       <td style="color:var(--muted);font-size:0.75rem">${r.note||'—'}</td>
       <td>
