@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>⚡ বিদ্যুৎ বিল ট্র্যাকার — Shamfinance</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
   --yellow:#F5B731;--dark-yellow:#C9880A;
@@ -15,23 +15,16 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* --- শুধু সংখ্যার জন্য Tiro Bangla ফন্ট সেটআপ --- */
-@font-face{
-  font-family: 'TiroDigits';
-  src: local('Tiro Bangla');
-  unicode-range: U+0030-0039, U+09E6-09EF; /* ASCII 0-9 & Bengali ₀-₉ */
-}
-
 body{
   background:var(--bg);
   color:var(--text);
-  font-family: 'TiroDigits', 'Hind Siliguri', sans-serif;
+  font-family: 'Tiro Bangla', serif;
   min-height:100vh;
 }
 
-/* টাইপোগ্রাফিক ও সংখ্যা ইনপুট ক্লাসের জন্য TiroDigits নিশ্চিত করা */
-input, select, .mono, .stat-value, .result-big, .rate, .b-val {
-  font-family: 'TiroDigits', 'Hind Siliguri', sans-serif !important;
+/* সকল টেক্সট, ইনপুট ও বাটনে Tiro Bangla ফন্ট নিশ্চিত করা */
+input, select, textarea, button, label, table, th, td, .tab, .btn {
+  font-family: 'Tiro Bangla', serif !important;
 }
 
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -46,9 +39,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:linear-gradient(135deg,#FFE066,#F5B731,#C9880A);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   letter-spacing:-0.5px;line-height:1.1}
-.header p{color:var(--muted);font-size:0.78rem;margin-top:5px}
+.header p{color:var(--muted);font-size:0.85rem;margin-top:5px}
 
-.sync-status{display:inline-flex;align-items:center;gap:6px;font-size:0.63rem;padding:3px 11px;border-radius:100px;margin-top:8px;
+.sync-status{display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;padding:3px 11px;border-radius:100px;margin-top:8px;
   border:1px solid var(--border-y);color:var(--muted);transition:all 0.3s}
 .sync-status.synced{border-color:rgba(82,201,122,0.3);color:var(--green)}
 .sync-status.syncing{border-color:rgba(245,183,49,0.3);color:var(--yellow)}
@@ -60,7 +53,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 /* Tabs */
 .tabs{display:flex;gap:8px;margin:0 0 20px;background:rgba(255,255,255,0.03);
   border-radius:14px;padding:5px}
-.tab{flex:1;padding:10px;border:none;border-radius:10px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.22s;
+.tab{flex:1;padding:10px;border:none;border-radius:10px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.22s;
   background:transparent;color:var(--muted)}
 .tab.active{background:var(--yellow);color:#0C0B08;box-shadow:0 4px 16px rgba(245,183,49,0.3)}
 .tab:not(.active):hover{color:var(--text);background:rgba(255,255,255,0.05)}
@@ -81,7 +74,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .stat::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
   background:linear-gradient(90deg,transparent,var(--yellow),transparent)}
 .stat:hover{transform:translateY(-2px)}
-.stat-label{font-size:0.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.stat-label{font-size:0.75rem;color:var(--muted);margin-bottom:7px}
 .stat-value{font-size:1.35rem;font-weight:500;line-height:1;color:var(--yellow)}
 
 /* Card */
@@ -90,29 +83,29 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(245,183,49,0.3),transparent)}
 .card-header-flex{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.card-title{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px}
+.card-title{font-size:0.8rem;color:var(--muted);letter-spacing:0.5px}
 
 /* Form */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:480px){.form-grid{grid-template-columns:1fr}}
 .full{grid-column:1/-1}
-label{display:block;font-size:0.7rem;color:var(--muted);margin-bottom:4px;font-weight:500}
+label{display:block;font-size:0.8rem;color:var(--muted);margin-bottom:4px;font-weight:500}
 input,select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
   border-radius:9px;padding:9px 12px;color:var(--text);
-  font-size:0.88rem;outline:none;transition:border-color 0.2s}
+  font-size:0.92rem;outline:none;transition:border-color 0.2s}
 input:focus,select:focus{border-color:rgba(245,183,49,0.5)}
 input[type=number]::-webkit-inner-spin-button{opacity:0.4}
 select option{background:#1A1810}
 
 .btn{border:none;border-radius:9px;padding:10px 20px;
-  font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
+  font-size:0.92rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
 .btn-primary{background:var(--yellow);color:#0C0B08;box-shadow:0 4px 16px rgba(245,183,49,0.25)}
 .btn-primary:hover{opacity:0.88}
 .btn-outline{background:none;color:var(--yellow);border:1px solid rgba(245,183,49,0.35)}
 .btn-outline:hover{background:rgba(245,183,49,0.08)}
 .btn-danger{background:rgba(248,113,113,0.15);color:var(--red);border:1px solid rgba(248,113,113,0.2)}
 .btn-danger:hover{background:rgba(248,113,113,0.25)}
-.btn-sm{padding:5px 12px;font-size:0.75rem;border-radius:7px}
+.btn-sm{padding:5px 12px;font-size:0.8rem;border-radius:7px}
 .btn-edit{background:rgba(96,165,250,0.12);color:var(--blue);border:1px solid rgba(96,165,250,0.2)}
 .btn-edit:hover{background:rgba(96,165,250,0.22)}
 .row-end{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
@@ -122,13 +115,13 @@ select option{background:#1A1810}
   border-radius:14px;padding:18px;margin-top:16px}
 .result-big{font-size:2.8rem;font-weight:500;
   color:var(--yellow);line-height:1.1}
-.result-label{font-size:0.72rem;color:var(--muted);margin-top:3px;margin-bottom:16px}
+.result-label{font-size:0.8rem;color:var(--muted);margin-top:3px;margin-bottom:16px}
 .b-row{display:flex;justify-content:space-between;align-items:center;
-  padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem}
+  padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.88rem}
 .b-row:last-child{border-bottom:none}
 .b-lbl{color:var(--muted)}
 .b-val{font-weight:500;color:var(--text)}
-.slab-tag{font-size:0.65rem;background:rgba(245,183,49,0.12);color:var(--yellow);
+.slab-tag{font-size:0.75rem;background:rgba(245,183,49,0.12);color:var(--yellow);
   border-radius:4px;padding:1px 5px;margin-left:5px}
 .b-total .b-lbl{color:var(--text);font-weight:600}
 .b-total .b-val{color:var(--yellow);font-size:1rem}
@@ -141,23 +134,22 @@ select option{background:#1A1810}
 .bar-fill{width:100%;border-radius:5px 5px 0 0;background:var(--yellow);
   opacity:0.7;min-height:3px;transition:height 0.4s ease;cursor:default}
 .bar-fill:hover{opacity:1}
-.bar-month{font-size:0.6rem;color:var(--muted);text-align:center;margin-top:3px}
-.bar-amt{font-size:0.6rem;color:var(--yellow)}
+.bar-month{font-size:0.7rem;color:var(--muted);text-align:center;margin-top:3px}
+.bar-amt{font-size:0.7rem;color:var(--yellow)}
 
 /* History table */
-.hist-table{width:100%;border-collapse:collapse;font-size:0.82rem}
+.hist-table{width:100%;border-collapse:collapse;font-size:0.88rem}
 .hist-table th{text-align:left;padding:8px 10px;background:rgba(255,255,255,0.02);
-  color:var(--muted);font-size:0.63rem;
-  text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid rgba(255,255,255,0.06)}
+  color:var(--muted);font-size:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06)}
 .hist-table td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .hist-table tr:hover td{background:rgba(255,255,255,0.02)}
 .hist-table tr:last-child td{border-bottom:none}
-.reading-cell{font-size:0.75rem;white-space:nowrap}
+.reading-cell{font-size:0.82rem;white-space:nowrap}
 .curr-r{color:var(--blue)}
 .prev-r{color:var(--muted)}
-.arrow-r{color:var(--muted);font-size:0.65rem;margin:0 2px}
+.arrow-r{color:var(--muted);font-size:0.75rem;margin:0 2px}
 
-.badge{display:inline-block;font-size:0.65rem;padding:2px 8px;border-radius:20px;font-weight:600}
+.badge{display:inline-block;font-size:0.75rem;padding:2px 8px;border-radius:20px;font-weight:600}
 .badge-paid{background:rgba(82,201,122,0.12);color:var(--green)}
 .badge-unpaid{background:rgba(248,113,113,0.12);color:var(--red)}
 
@@ -165,14 +157,13 @@ select option{background:#1A1810}
 .empty-icon{font-size:2rem;margin-bottom:8px}
 
 /* Tariff */
-.tariff-tbl{width:100%;border-collapse:collapse;font-size:0.82rem}
+.tariff-tbl{width:100%;border-collapse:collapse;font-size:0.88rem}
 .tariff-tbl th{text-align:left;padding:8px 10px;color:var(--muted);
-  font-size:0.63rem;text-transform:uppercase;
-  letter-spacing:0.05em;border-bottom:1px solid rgba(255,255,255,0.06)}
+  font-size:0.75rem;border-bottom:1px solid rgba(255,255,255,0.06)}
 .tariff-tbl td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .tariff-tbl tr:last-child td{border-bottom:none}
 .rate{color:var(--yellow)}
-.note-text{font-size:0.7rem;color:var(--muted);margin-top:10px;line-height:1.5}
+.note-text{font-size:0.8rem;color:var(--muted);margin-top:10px;line-height:1.5}
 
 /* Edit panel highlight */
 .edit-mode{border-color:rgba(96,165,250,0.4)!important}
