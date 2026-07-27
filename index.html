@@ -14,12 +14,26 @@
   --green:#52C97A;--red:#F87171;--blue:#60A5FA;--orange:#FB923C;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Hind Siliguri',sans-serif;min-height:100vh}
+
+/* --- শুধু সংখ্যার জন্য Tiro Bangla ফন্ট সেটআপ --- */
 @font-face{
-  font-family:'Hind Siliguri';
-  src:local('Tiro Bangla');
-  unicode-range:U+0030-0039,U+09E6-09EF;
+  font-family: 'TiroDigits';
+  src: local('Tiro Bangla');
+  unicode-range: U+0030-0039, U+09E6-09EF; /* ASCII 0-9 & Bengali ₀-₉ */
 }
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family: 'TiroDigits', 'Hind Siliguri', sans-serif;
+  min-height:100vh;
+}
+
+/* টাইপোগ্রাফিক ও সংখ্যা ইনপুট ক্লাসের জন্য TiroDigits নিশ্চিত করা */
+input, select, .mono, .stat-value, .result-big, .rate, .b-val {
+  font-family: 'TiroDigits', 'Hind Siliguri', sans-serif !important;
+}
+
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:radial-gradient(ellipse 60% 40% at 15% 10%,rgba(245,183,49,0.06) 0%,transparent 55%),
              radial-gradient(ellipse 50% 40% at 85% 85%,rgba(245,183,49,0.04) 0%,transparent 55%)}
@@ -34,8 +48,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   letter-spacing:-0.5px;line-height:1.1}
 .header p{color:var(--muted);font-size:0.78rem;margin-top:5px}
 
-.sync-status{display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;
-  font-size:0.63rem;padding:3px 11px;border-radius:100px;margin-top:8px;
+.sync-status{display:inline-flex;align-items:center;gap:6px;font-size:0.63rem;padding:3px 11px;border-radius:100px;margin-top:8px;
   border:1px solid var(--border-y);color:var(--muted);transition:all 0.3s}
 .sync-status.synced{border-color:rgba(82,201,122,0.3);color:var(--green)}
 .sync-status.syncing{border-color:rgba(245,183,49,0.3);color:var(--yellow)}
@@ -47,8 +60,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 /* Tabs */
 .tabs{display:flex;gap:8px;margin:0 0 20px;background:rgba(255,255,255,0.03);
   border-radius:14px;padding:5px}
-.tab{flex:1;padding:10px;border:none;border-radius:10px;font-family:'Hind Siliguri',sans-serif;
-  font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.22s;
+.tab{flex:1;padding:10px;border:none;border-radius:10px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.22s;
   background:transparent;color:var(--muted)}
 .tab.active{background:var(--yellow);color:#0C0B08;box-shadow:0 4px 16px rgba(245,183,49,0.3)}
 .tab:not(.active):hover{color:var(--text);background:rgba(255,255,255,0.05)}
@@ -69,9 +81,8 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .stat::after{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
   background:linear-gradient(90deg,transparent,var(--yellow),transparent)}
 .stat:hover{transform:translateY(-2px)}
-.stat-label{font-size:0.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;
-  font-family:'DM Mono',monospace;margin-bottom:7px}
-.stat-value{font-family:'DM Mono',monospace;font-size:1.35rem;font-weight:500;line-height:1;color:var(--yellow)}
+.stat-label{font-size:0.63rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.stat-value{font-size:1.35rem;font-weight:500;line-height:1;color:var(--yellow)}
 
 /* Card */
 .card{background:var(--card);border:1px solid var(--border-y);border-radius:16px;
@@ -79,8 +90,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(245,183,49,0.3),transparent)}
 .card-header-flex{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.card-title{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;
-  font-family:'DM Mono',monospace}
+.card-title{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px}
 
 /* Form */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -88,13 +98,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .full{grid-column:1/-1}
 label{display:block;font-size:0.7rem;color:var(--muted);margin-bottom:4px;font-weight:500}
 input,select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
-  border-radius:9px;padding:9px 12px;color:var(--text);font-family:'Hind Siliguri',sans-serif;
+  border-radius:9px;padding:9px 12px;color:var(--text);
   font-size:0.88rem;outline:none;transition:border-color 0.2s}
 input:focus,select:focus{border-color:rgba(245,183,49,0.5)}
 input[type=number]::-webkit-inner-spin-button{opacity:0.4}
 select option{background:#1A1810}
 
-.btn{border:none;border-radius:9px;padding:10px 20px;font-family:'Hind Siliguri',sans-serif;
+.btn{border:none;border-radius:9px;padding:10px 20px;
   font-size:0.88rem;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px}
 .btn-primary{background:var(--yellow);color:#0C0B08;box-shadow:0 4px 16px rgba(245,183,49,0.25)}
 .btn-primary:hover{opacity:0.88}
@@ -110,16 +120,16 @@ select option{background:#1A1810}
 /* Calculator result */
 .result-box{background:rgba(245,183,49,0.06);border:1px solid rgba(245,183,49,0.2);
   border-radius:14px;padding:18px;margin-top:16px}
-.result-big{font-family:'DM Mono',monospace;font-size:2.8rem;font-weight:500;
+.result-big{font-size:2.8rem;font-weight:500;
   color:var(--yellow);line-height:1.1}
 .result-label{font-size:0.72rem;color:var(--muted);margin-top:3px;margin-bottom:16px}
 .b-row{display:flex;justify-content:space-between;align-items:center;
   padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem}
 .b-row:last-child{border-bottom:none}
 .b-lbl{color:var(--muted)}
-.b-val{font-family:'DM Mono',monospace;font-weight:500;color:var(--text)}
+.b-val{font-weight:500;color:var(--text)}
 .slab-tag{font-size:0.65rem;background:rgba(245,183,49,0.12);color:var(--yellow);
-  border-radius:4px;padding:1px 5px;margin-left:5px;font-family:'DM Mono',monospace}
+  border-radius:4px;padding:1px 5px;margin-left:5px}
 .b-total .b-lbl{color:var(--text);font-weight:600}
 .b-total .b-val{color:var(--yellow);font-size:1rem}
 .b-total{border-top:1.5px solid rgba(245,183,49,0.3)!important;margin-top:4px;padding-top:10px!important}
@@ -132,17 +142,16 @@ select option{background:#1A1810}
   opacity:0.7;min-height:3px;transition:height 0.4s ease;cursor:default}
 .bar-fill:hover{opacity:1}
 .bar-month{font-size:0.6rem;color:var(--muted);text-align:center;margin-top:3px}
-.bar-amt{font-size:0.6rem;color:var(--yellow);font-family:'DM Mono',monospace}
+.bar-amt{font-size:0.6rem;color:var(--yellow)}
 
 /* History table */
 .hist-table{width:100%;border-collapse:collapse;font-size:0.82rem}
 .hist-table th{text-align:left;padding:8px 10px;background:rgba(255,255,255,0.02);
-  color:var(--muted);font-size:0.63rem;font-family:'DM Mono',monospace;
+  color:var(--muted);font-size:0.63rem;
   text-transform:uppercase;letter-spacing:0.05em;border-bottom:1px solid rgba(255,255,255,0.06)}
 .hist-table td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .hist-table tr:hover td{background:rgba(255,255,255,0.02)}
 .hist-table tr:last-child td{border-bottom:none}
-.mono{font-family:'DM Mono',monospace}
 .reading-cell{font-size:0.75rem;white-space:nowrap}
 .curr-r{color:var(--blue)}
 .prev-r{color:var(--muted)}
@@ -158,11 +167,11 @@ select option{background:#1A1810}
 /* Tariff */
 .tariff-tbl{width:100%;border-collapse:collapse;font-size:0.82rem}
 .tariff-tbl th{text-align:left;padding:8px 10px;color:var(--muted);
-  font-size:0.63rem;font-family:'DM Mono',monospace;text-transform:uppercase;
+  font-size:0.63rem;text-transform:uppercase;
   letter-spacing:0.05em;border-bottom:1px solid rgba(255,255,255,0.06)}
 .tariff-tbl td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .tariff-tbl tr:last-child td{border-bottom:none}
-.rate{font-family:'DM Mono',monospace;color:var(--yellow)}
+.rate{color:var(--yellow)}
 .note-text{font-size:0.7rem;color:var(--muted);margin-top:10px;line-height:1.5}
 
 /* Edit panel highlight */
@@ -759,9 +768,9 @@ function renderHistory() {
       : r.currRead ? `<span class="curr-r">${r.currRead.toLocaleString()}</span>` : '—';
     tbl += `<tr>
       <td>${bnMonth(r.month)}</td>
-      <td class="reading-cell mono">${rdg}</td>
-      <td class="mono">${r.units>0?r.units+' kWh':'—'}</td>
-      <td class="mono" style="color:var(--yellow)">৳ ${r.amount.toLocaleString()}</td>
+      <td class="reading-cell">${rdg}</td>
+      <td>${r.units>0?r.units+' kWh':'—'}</td>
+      <td style="color:var(--yellow)">৳ ${r.amount.toLocaleString()}</td>
       <td><span class="badge ${r.status==='paid'?'badge-paid':'badge-unpaid'}">${r.status==='paid'?'পরিশোধিত':'বকেয়া'}</span></td>
       <td style="color:var(--muted);font-size:0.75rem">${r.note||'—'}</td>
       <td>
